@@ -69,10 +69,12 @@
         }
     </style>
 </head>
+
 <body>
     <div class="chat-container">
         <h2>Smart FAQ Chatbot</h2>
         <div id="messages"></div>
+
         <form id="chat-form">
             <input type="text" id="question" placeholder="Ask your question..." required>
             <button type="submit">Send</button>
@@ -83,8 +85,37 @@
         const form = document.getElementById('chat-form');
         const messages = document.getElementById('messages');
 
-        form.addEventListener('submit', async function(e) {
+        const faqData = [
+            {
+                questions: ["what is ai", "define ai", "artificial intelligence"],
+                answer: "AI stands for Artificial Intelligence. It enables machines to think and learn."
+            },
+            {
+                questions: ["what is html", "define html"],
+                answer: "HTML is used to create web pages."
+            },
+            {
+                questions: ["who are you"],
+                answer: "I am your chatbot 🤖"
+            }
+        ];
+
+        function getAnswer(userInput) {
+            userInput = userInput.toLowerCase();
+
+            for (let item of faqData) {
+                for (let q of item.questions) {
+                    if (userInput.includes(q)) {
+                        return item.answer;
+                    }
+                }
+            }
+            return "Sorry, I don't know that yet.";
+        }
+
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
+
             const input = document.getElementById('question');
             const question = input.value.trim();
             if (!question) return;
@@ -92,18 +123,13 @@
             messages.innerHTML += `<div class="message user">You: ${question}</div>`;
             input.value = '';
 
-            const response = await fetch('/ask', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: 'question=' + encodeURIComponent(question)
-            });
-
-            const data = await response.json();
-            messages.innerHTML += `<div class="message bot">Bot: ${data.answer}</div>`;
-            messages.scrollTop = messages.scrollHeight;
+            setTimeout(() => {
+                const answer = getAnswer(question);
+                messages.innerHTML += `<div class="message bot">Bot: ${answer}</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }, 500);
         });
     </script>
 </body>
 </html>
+
