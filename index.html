@@ -85,20 +85,40 @@
         const form = document.getElementById('chat-form');
         const messages = document.getElementById('messages');
 
-        const faqData = [
-            {
-                questions: ["what is ai", "define ai", "artificial intelligence"],
-                answer: "AI stands for Artificial Intelligence. It enables machines to think and learn."
-            },
-            {
-                questions: ["what is html", "define html"],
-                answer: "HTML is used to create web pages."
-            },
-            {
-                questions: ["who are you"],
-                answer: "I am your chatbot 🤖"
-            }
-        ];
+       const faqData = [
+    {
+        questions: ["what is ai", "define ai", "artificial intelligence"],
+        answer: "AI stands for Artificial Intelligence. It enables machines to think and learn."
+    },
+    {
+        questions: ["what is html", "define html"],
+        answer: "HTML is used to create web pages."
+    },
+    {
+        questions: ["what is css"],
+        answer: "CSS is used to style and design web pages."
+    },
+    {
+        questions: ["what is javascript", "what is js"],
+        answer: "JavaScript is used to make web pages interactive."
+    },
+    {
+        questions: ["what is python"],
+        answer: "Python is a popular programming language used for web development, AI, and more."
+    },
+    {
+        questions: ["what is chatbot"],
+        answer: "A chatbot is a program that can simulate conversation with users."
+    },
+    {
+        questions: ["who are you"],
+        answer: "I am your chatbot 🤖"
+    },
+    {
+        questions: ["how are you"],
+        answer: "I'm just code, but I'm running perfectly 😄"
+    }
+];
 
         function getAnswer(userInput) {
             userInput = userInput.toLowerCase();
